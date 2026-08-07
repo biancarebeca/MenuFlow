@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #a206ad,
+        #b648f1,
+        #c376d2
+    );
+
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.hero h1 {
+    color: rgb(237, 214, 247);
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: white;
+    font-size: 22px;
+    opacity: 0.9;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.category-section {
+    margin-bottom: 50px;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.category-header h2 {
+    margin: 0;
+
+    color: white;
+
+    font-size: 32px;
+}
+
+.emoji {
+    font-size: 42px;
+}
+
+.card {
+    background: rgb(245, 198, 245);
+
+    padding: 20px;
+
+    margin-bottom: 15px;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-size: 18px;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.info {
+    flex: 1;
+}
+
+.info h3 {
+    margin: 0;
+    color: #20012b;
+}
+
+.price {
+    font-weight: bold;
+    color: #20012b;
+    font-size: 20px;
+}

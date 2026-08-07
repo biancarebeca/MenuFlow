@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>MenuFlow</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="hero">
+
+            <h1>🍽️ MenuFlow</h1>
+
+            <p>
+                Descoperă preparatele noastre preferate
+            </p>
+
+        </div>
+
+        <div class="menu">
+
+            {% for category, items in menu.items() %}
+
+            <div class="category-section">
+
+                <div class="category-header">
+
+                    {% if category == "Pizza" %}
+                        <span class="emoji">🍕</span>
+                    {% elif category == "Paste" %}
+                        <span class="emoji">🍝</span>
+                    {% elif category == "Salate" %}
+                        <span class="emoji">🥗</span>
+                    {% elif category == "Bauturi" %}
+                        <span class="emoji">🥤</span>
+                    {% else %}
+                        <span class="emoji">🍽️</span>
+                    {% endif %}
+
+                    <h2>{{ category }}</h2>
+
+                </div>
+
+                {% for item in items %}
+
+                <div class="card">
+
+                    <div class="info">
+
+                        <h3>{{ item.name }}</h3>
+
+                    </div>
+
+                    <span class="price">
+                        {{ item.price }}
+                    </span>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
