@@ -7,7 +7,12 @@ from collections import defaultdict
 from ocr import extract_text
 from ai import organize_menu
 
+from database import engine, SessionLocal
+from models import Base, MenuItem
+
 app = FastAPI()
+
+Base.metadata.create_all(bind=engine)
 
 templates = Jinja2Templates(directory="templates")
 
@@ -33,15 +38,24 @@ async def upload_image(file: UploadFile = File(...)):
 
     result = extract_text("temp_image.jpg")
 
-    print("OCR:", result)
-
     text = "\n".join(result)
-
-    print(text)
 
     menu = organize_menu(text)
 
-    print(menu)
+    db = SessionLocal()
+
+    for item in menu:
+
+        db_item = MenuItem(
+            category=item["category"],
+            name=item["name"],
+            price=item["price"]
+        )
+
+        db.add(db_item)
+
+    db.commit()
+    db.close()
 
     menu_data = menu
 
@@ -53,15 +67,47 @@ async def upload_image(file: UploadFile = File(...)):
 @app.get("/view-menu")
 def view_menu(request: Request):
 
+    db = SessionLocal()
+
+    items = db.query(MenuItem).all()
+
+    db.close()
+
     grouped_menu = defaultdict(list)
 
-    for item in menu_data:
-        grouped_menu[item["category"]].append(item)
+    for item in items:
+
+        grouped_menu[item.category].append(
+            {
+                "name": item.name,
+                "price": item.price
+            }
+        )
 
     return templates.TemplateResponse(
-    request,
-    "menu.html",
-    {
-        "menu": grouped_menu
-    }
-  )
+        request,
+        "menu.html",
+        {
+            "menu": grouped_menu
+        }
+    )
+
+
+@app.get("/all-items")
+def all_items():
+
+    db = SessionLocal()
+
+    items = db.query(MenuItem).all()
+
+    db.close()
+
+    return [
+        {
+            "id": item.id,
+            "category": item.category,
+            "name": item.name,
+            "price": item.price
+        }
+        for item in items
+    ]

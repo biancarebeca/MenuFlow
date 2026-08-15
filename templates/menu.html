@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="ro">
 
 <head>
+
+    <meta charset="UTF-8">
 
     <title>MenuFlow</title>
 
@@ -11,59 +13,55 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <div class="hero">
+    <div class="hero">
 
-            <h1>🍽️ MenuFlow</h1>
+        <h1>🍽️ MenuFlow</h1>
 
-            <p>
-                Descoperă preparatele noastre preferate
-            </p>
+        <p>
+            Descoperă preparatele noastre preferate
+        </p>
 
-        </div>
+    </div>
 
-        <div class="menu">
+    <div class="menu">
 
-            {% for category, items in menu.items() %}
+        {% for category, items in menu.items() %}
 
-            <div class="category-section">
+        <div class="category-section">
 
-                <div class="category-header">
+            <div class="category-header">
 
-                    {% if category == "Pizza" %}
-                        <span class="emoji">🍕</span>
-                    {% elif category == "Paste" %}
-                        <span class="emoji">🍝</span>
-                    {% elif category == "Salate" %}
-                        <span class="emoji">🥗</span>
-                    {% elif category == "Bauturi" %}
-                        <span class="emoji">🥤</span>
-                    {% else %}
-                        <span class="emoji">🍽️</span>
-                    {% endif %}
+                {% if category == "Pizza" %}
+                    <span class="emoji">🍕</span>
+                {% elif category == "Paste" %}
+                    <span class="emoji">🍝</span>
+                {% elif category == "Salate" %}
+                    <span class="emoji">🥗</span>
+                {% elif category == "Bauturi" %}
+                    <span class="emoji">🥤</span>
+                {% else %}
+                    <span class="emoji">🍽️</span>
+                {% endif %}
 
-                    <h2>{{ category }}</h2>
+                <h2>{{ category }}</h2>
 
-                </div>
+            </div>
 
-                {% for item in items %}
+            {% for item in items %}
 
-                <div class="card">
+            <div class="card">
 
-                    <div class="info">
+                <div class="info">
 
-                        <h3>{{ item.name }}</h3>
-
-                    </div>
-
-                    <span class="price">
-                        {{ item.price }}
-                    </span>
+                    <h3>{{ item.name }}</h3>
 
                 </div>
 
-                {% endfor %}
+                <span class="price">
+                    {{ item.price }}
+                </span>
 
             </div>
 
@@ -71,7 +69,11 @@
 
         </div>
 
+        {% endfor %}
+
     </div>
+
+</div>
 
 </body>
 
