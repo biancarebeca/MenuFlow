@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Edit Product</title>
+
+</head>
+
+<body>
+
+    <h1>Editare produs</h1>
+
+    <form method="post">
+
+        <label>Categorie</label>
+
+        <br>
+
+        <input
+            type="text"
+            name="category"
+            value="{{ item.category }}"
+        >
+
+        <br><br>
+
+        <label>Nume</label>
+
+        <br>
+
+        <input
+            type="text"
+            name="name"
+            value="{{ item.name }}"
+        >
+
+        <br><br>
+
+        <label>Pret</label>
+
+        <br>
+
+        <input
+            type="text"
+            name="price"
+            value="{{ item.price }}"
+        >
+
+        <br><br>
+
+        <button type="submit">
+            Salveaza
+        </button>
+
+    </form>
+
+</body>
+
+</html>

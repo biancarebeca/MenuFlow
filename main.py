@@ -1,4 +1,5 @@
-from fastapi import FastAPI, UploadFile, File, Request
+from fastapi import FastAPI, UploadFile, File, Request, Form
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -18,8 +19,6 @@ templates = Jinja2Templates(directory="templates")
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-menu_data = []
-
 
 @app.get("/")
 def home():
@@ -28,8 +27,6 @@ def home():
 
 @app.post("/upload")
 async def upload_image(file: UploadFile = File(...)):
-
-    global menu_data
 
     content = await file.read()
 
@@ -56,8 +53,6 @@ async def upload_image(file: UploadFile = File(...)):
 
     db.commit()
     db.close()
-
-    menu_data = menu
 
     return {
         "menu": menu
@@ -111,3 +106,129 @@ def all_items():
         }
         for item in items
     ]
+
+
+@app.get("/admin")
+def admin(request: Request):
+
+    db = SessionLocal()
+
+    items = db.query(MenuItem).all()
+
+    db.close()
+
+    return templates.TemplateResponse(
+        request,
+        "admin.html",
+        {
+            "items": items
+        }
+    )
+
+
+@app.get("/delete/{item_id}")
+def delete_item(item_id: int):
+
+    db = SessionLocal()
+
+    item = db.query(MenuItem).filter(
+        MenuItem.id == item_id
+    ).first()
+
+    if item:
+        db.delete(item)
+        db.commit()
+
+    db.close()
+
+    return RedirectResponse(
+        url="/admin",
+        status_code=303
+    )
+
+
+@app.get("/edit/{item_id}")
+def edit_page(request: Request, item_id: int):
+
+    db = SessionLocal()
+
+    item = db.query(MenuItem).filter(
+        MenuItem.id == item_id
+    ).first()
+
+    db.close()
+
+    return templates.TemplateResponse(
+        request,
+        "edit.html",
+        {
+            "item": item
+        }
+    )
+
+
+@app.post("/edit/{item_id}")
+def save_edit(
+    item_id: int,
+    category: str = Form(...),
+    name: str = Form(...),
+    price: str = Form(...)
+):
+
+    db = SessionLocal()
+
+    item = db.query(MenuItem).filter(
+        MenuItem.id == item_id
+    ).first()
+
+    if item:
+
+        item.category = category
+        item.name = name
+        item.price = price
+
+        db.commit()
+
+    db.close()
+
+    return RedirectResponse(
+        url="/admin",
+        status_code=303
+    )
+
+
+@app.get("/add")
+def add_page(request: Request):
+
+    return templates.TemplateResponse(
+        request,
+        "add.html",
+        {}
+    )
+
+
+@app.post("/add")
+def save_new_product(
+    category: str = Form(...),
+    name: str = Form(...),
+    price: str = Form(...)
+):
+
+    db = SessionLocal()
+
+    item = MenuItem(
+        category=category,
+        name=name,
+        price=price
+    )
+
+    db.add(item)
+
+    db.commit()
+
+    db.close()
+
+    return RedirectResponse(
+        url="/admin",
+        status_code=303
+    )
