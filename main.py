@@ -43,6 +43,14 @@ async def upload_image(file: UploadFile = File(...)):
 
     for item in menu:
 
+        existing = db.query(MenuItem).filter(
+            MenuItem.name == item["name"],
+            MenuItem.price == item["price"]
+        ).first()
+
+        if existing:
+            continue
+
         db_item = MenuItem(
             category=item["category"],
             name=item["name"],
@@ -232,3 +240,38 @@ def save_new_product(
         url="/admin",
         status_code=303
     )
+
+@app.get("/fix-categories")
+def fix_categories():
+
+    db = SessionLocal()
+
+    items = db.query(MenuItem).all()
+
+    for item in items:
+
+        if item.category in [
+            "Drink",
+            "Drinks",
+            "Beverages",
+            "Beverage"
+        ]:
+            item.category = "Bauturi"
+
+        elif item.category in [
+            "Salads",
+            "Salad"
+        ]:
+            item.category = "Salate"
+
+        elif item.category in [
+            "Pasta"
+        ]:
+            item.category = "Paste"
+
+    db.commit()
+    db.close()
+
+    return {
+        "status": "ok"
+    }
