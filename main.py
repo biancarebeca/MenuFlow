@@ -41,6 +41,10 @@ async def upload_image(file: UploadFile = File(...)):
 
     db = SessionLocal()
 
+    # Sterge meniul vechi
+    db.query(MenuItem).delete()
+    db.commit()
+
     for item in menu:
 
         existing = db.query(MenuItem).filter(
@@ -68,11 +72,22 @@ async def upload_image(file: UploadFile = File(...)):
 
 
 @app.get("/view-menu")
-def view_menu(request: Request):
+def view_menu(
+    request: Request,
+    search: str = ""
+):
 
     db = SessionLocal()
 
-    items = db.query(MenuItem).all()
+    if search:
+
+        items = db.query(MenuItem).filter(
+            MenuItem.name.contains(search)
+        ).all()
+
+    else:
+
+        items = db.query(MenuItem).all()
 
     db.close()
 
@@ -91,10 +106,10 @@ def view_menu(request: Request):
         request,
         "menu.html",
         {
-            "menu": grouped_menu
+            "menu": grouped_menu,
+            "search": search
         }
     )
-
 
 @app.get("/all-items")
 def all_items():

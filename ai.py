@@ -15,14 +15,23 @@ def organize_menu(text):
     prompt = f"""
 Extrage produsele din meniul de restaurant.
 
-Reguli:
+IMPORTANT:
+
 - Returneaza DOAR JSON valid.
 - Nu scrie explicatii.
-- Ignora titluri precum PIZZA, PASTE, BAUTURI.
-- Fiecare produs trebuie sa aiba:
-  - category
-  - name
-  - price
+- Pastreaza categoria exact asa cum apare in meniu.
+- Daca un produs este sub titlul unei categorii, foloseste acel titlu ca valoare pentru "category".
+- Nu inventa categorii noi.
+- Nu traduce categoriile.
+- Nu redenumi categoriile.
+- Nu grupa produse in alte categorii.
+- Daca nu esti sigur de categorie, foloseste ultima categorie valida gasita in meniu.
+
+Fiecare produs trebuie sa aiba:
+
+- category
+- name
+- price
 
 Format:
 
@@ -54,7 +63,6 @@ Text:
     print("AI RESPONSE:")
     print(content)
 
-    # Scoate eventualele ```json
     content = content.replace("```json", "")
     content = content.replace("```", "")
     content = content.strip()

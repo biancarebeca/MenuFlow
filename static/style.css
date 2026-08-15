@@ -104,3 +104,39 @@ body {
     color: #20012b;
     font-size: 20px;
 }
+.search-form {
+
+    display: flex;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    margin-bottom: 40px;
+}
+
+.search-form input {
+
+    padding: 12px;
+
+    width: 300px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+}
+
+.search-form button {
+
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
