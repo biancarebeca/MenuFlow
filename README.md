@@ -47,6 +47,7 @@ Stores menu items using SQLite and SQLAlchemy.
 
 Displays products grouped by category.
 
+
 ### ⚙️ Admin Panel
 
 Manage menu items directly from the browser.
