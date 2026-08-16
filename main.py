@@ -1,5 +1,9 @@
 from fastapi import FastAPI, UploadFile, File, Request, Form
 from fastapi.responses import RedirectResponse
+from fastapi.responses import FileResponse
+
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -290,3 +294,61 @@ def fix_categories():
     return {
         "status": "ok"
     }
+
+@app.get("/export-pdf")
+def export_pdf():
+
+    db = SessionLocal()
+
+    items = db.query(MenuItem).all()
+
+    db.close()
+
+    grouped_menu = defaultdict(list)
+
+    for item in items:
+
+        grouped_menu[item.category].append(item)
+
+    pdf_file = "menu.pdf"
+
+    doc = SimpleDocTemplate(pdf_file)
+
+    styles = getSampleStyleSheet()
+
+    content = []
+
+    content.append(
+        Paragraph("MenuFlow Menu", styles["Title"])
+    )
+
+    content.append(
+        Spacer(1, 20)
+    )
+
+    for category, products in grouped_menu.items():
+
+        content.append(
+            Paragraph(category, styles["Heading2"])
+        )
+
+        for product in products:
+
+            content.append(
+                Paragraph(
+                    f"{product.name} - {product.price}",
+                    styles["BodyText"]
+                )
+            )
+
+        content.append(
+            Spacer(1, 10)
+        )
+
+    doc.build(content)
+
+    return FileResponse(
+        pdf_file,
+        media_type="application/pdf",
+        filename="menu.pdf"
+    )

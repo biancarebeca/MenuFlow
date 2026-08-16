@@ -17,23 +17,58 @@
 
         h1{
             margin-bottom:20px;
+            color:#333;
+        }
+
+        .top-buttons{
+            margin-bottom:25px;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:12px 20px;
+            border-radius:10px;
+            text-decoration:none;
+            color:white;
+            font-weight:bold;
+            margin-right:10px;
+            transition:0.2s;
+        }
+
+        .btn:hover{
+            opacity:0.9;
+        }
+
+        .add-btn{
+            background:#4CAF50;
+        }
+
+        .pdf-btn{
+            background:#673AB7;
         }
 
         table{
             width:100%;
             border-collapse:collapse;
             background:white;
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0 4px 12px rgba(0,0,0,0.08);
         }
 
         th{
             background:#7d2ae8;
             color:white;
-            padding:12px;
+            padding:14px;
         }
 
         td{
-            padding:12px;
-            border-bottom:1px solid #ddd;
+            padding:14px;
+            border-bottom:1px solid #eee;
+        }
+
+        tr:hover{
+            background:#fafafa;
         }
 
         .delete-btn{
@@ -53,14 +88,6 @@
             margin-right:10px;
         }
 
-        .add-btn{
-            background:#4caf50;
-            color:white;
-            padding:10px 20px;
-            text-decoration:none;
-            border-radius:8px;
-        }
-
     </style>
 
 </head>
@@ -69,14 +96,23 @@
 
     <h1>⚙️ Admin MenuFlow</h1>
 
-    <a
-        class="add-btn"
-        href="/add"
-    >
-        ➕ Add Product
-    </a>
+    <div class="top-buttons">
 
-    <br><br>
+        <a
+            class="btn add-btn"
+            href="/add"
+        >
+            ➕ Add Product
+        </a>
+
+        <a
+            class="btn pdf-btn"
+            href="/export-pdf"
+        >
+            📄 Export PDF
+        </a>
+
+    </div>
 
     <table>
 
@@ -84,8 +120,8 @@
             <th>ID</th>
             <th>Categorie</th>
             <th>Produs</th>
-            <th>Pret</th>
-            <th>Actiune</th>
+            <th>Preț</th>
+            <th>Acțiune</th>
         </tr>
 
         {% for item in items %}
@@ -112,7 +148,7 @@
                 <a
                     class="delete-btn"
                     href="/delete/{{ item.id }}"
-                    onclick="return confirm('Esti sigur ca vrei sa stergi acest produs?')"
+                    onclick="return confirm('Ești sigur că vrei să ștergi acest produs?')"
                 >
                     🗑 Delete
                 </a>
