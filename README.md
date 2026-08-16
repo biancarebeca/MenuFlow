@@ -1,259 +1,94 @@
 # 🍽️ MenuFlow
 
-> Transform any restaurant menu photo into a structured, searchable, editable digital menu using OCR, AI, and FastAPI.
+> Transform a restaurant menu photo into a structured, editable digital menu using OCR, AI, and FastAPI.
 
 ---
 
 ## 🚀 Overview
 
-MenuFlow is an AI-powered web application that automates one of the most repetitive tasks in the restaurant industry: converting printed menus into digital menus.
+MenuFlow automates the process of converting printed restaurant menus into digital menus.
 
-Instead of manually entering dozens of products, categories, and prices, a restaurant owner can simply upload a photo of a menu.
+Upload a menu image and the application will:
 
-MenuFlow will:
-
-1. Extract text from the image using OCR
-2. Understand and structure the menu using AI
-3. Organize products into categories
-4. Store everything in a database
-5. Generate a clean web menu
-6. Provide a full admin panel for management
-7. Export the menu as a PDF
-
-The result is a complete digital menu created automatically from a single image.
+* Extract text using OCR
+* Organize products with AI
+* Save menu items to a database
+* Generate a web menu automatically
+* Provide a full admin panel
+* Export the menu as a PDF
 
 ---
 
-# ✨ Features
+## ✨ Features
 
-## 📸 Menu Image Upload
+### 📸 Menu Upload
 
-Upload a menu photo from any restaurant.
+Upload a photo of a restaurant menu.
 
-Supported examples:
+### 🔍 OCR Processing
 
-* Printed menus
-* Restaurant flyers
-* Scanned menus
-* Phone photos
+Extracts text from the image automatically.
 
----
+### 🤖 AI Menu Structuring
 
-## 🔍 OCR Text Extraction
-
-MenuFlow extracts raw text from the uploaded image.
-
-Example:
-
-Before:
-
-```text
-PIZZA
-
-Pizza Margherita 35 lei
-Pizza Diavola 40 lei
-
-PASTA
-
-Carbonara 36 lei
-```
-
-After OCR:
-
-```text
-Pizza Margherita 35 lei
-Pizza Diavola 40 lei
-Carbonara 36 lei
-```
-
----
-
-## 🤖 AI Menu Understanding
-
-Raw OCR text is processed by AI.
-
-The model identifies:
+Identifies:
 
 * Categories
 * Product names
 * Prices
 
-Example:
+and converts them into structured data.
 
-```json
-[
-  {
-    "category": "Pizza",
-    "name": "Pizza Margherita",
-    "price": "35 lei"
-  },
-  {
-    "category": "Pizza",
-    "name": "Pizza Diavola",
-    "price": "40 lei"
-  }
-]
-```
+### 💾 Database Storage
 
----
+Stores menu items using SQLite and SQLAlchemy.
 
-## 💾 Database Storage
+### 🍽️ Dynamic Menu Page
 
-All extracted products are stored in SQLite using SQLAlchemy.
+Displays products grouped by category.
 
-Each item contains:
+### ⚙️ Admin Panel
 
-```text
-ID
-Category
-Product Name
-Price
-```
+Manage menu items directly from the browser.
 
----
+Features include:
 
-## 🍽️ Dynamic Menu Generation
-
-MenuFlow automatically creates a structured menu page.
-
-Example:
-
-```text
-Pizza
- ├─ Pizza Margherita ........ 35 lei
- ├─ Pizza Diavola ........... 40 lei
-
-Pasta
- ├─ Carbonara ............... 36 lei
-```
-
----
-
-## 🔎 Search Functionality
-
-Users can instantly search for products.
-
-Examples:
-
-```text
-pizza
-carbonara
-espresso
-cola
-```
-
-Results are filtered in real time.
-
----
-
-## ⚙️ Admin Panel
-
-The application includes a complete management interface.
-
-### Features
-
-* ➕ Add Products
-* ✏️ Edit Products
-* 🗑 Delete Products
+* ➕ Add Product
+* ✏️ Edit Product
+* 🗑 Delete Product
 * 🔎 Search Products
-* 📄 Export PDF
 
-No database knowledge is required.
+### 📄 PDF Export
 
----
+Generate and download a PDF version of the current menu.
 
-## ✏️ Edit Products
+### 🔄 Menu Replacement
 
-Restaurant owners can modify:
-
-* Category
-* Product Name
-* Price
-
-directly from the browser.
+Uploading a new menu automatically replaces the previous one.
 
 ---
 
-## ➕ Add Products
-
-New products can be inserted manually through the Admin Panel.
-
-Example:
-
-```text
-Category: Dessert
-Name: Tiramisu
-Price: 22 lei
-```
-
----
-
-## 🗑 Delete Products
-
-Products can be safely removed.
-
-A confirmation dialog prevents accidental deletion.
-
----
-
-## 🔄 Automatic Menu Replacement
-
-When a new menu image is uploaded:
-
-```text
-Old Menu
-     ↓
-Removed
-     ↓
-New Menu
-```
-
-The application always displays the latest uploaded menu.
-
-This prevents multiple restaurant menus from being mixed together.
-
----
-
-## 📄 PDF Export
-
-Generate a downloadable PDF version of the menu with one click.
-
-Perfect for:
-
-* Printing
-* Sharing
-* Archiving
-* Client delivery
-
----
-
-# 🏗 Architecture
+## 🏗 Workflow
 
 ```text
 Menu Image
-     │
-     ▼
+     ↓
 OCR Extraction
-     │
-     ▼
+     ↓
 AI Processing
-     │
-     ▼
-Structured Menu Data
-     │
-     ▼
+     ↓
+Structured Menu
+     ↓
 SQLite Database
-     │
-     ├────────► Admin Panel
-     │
-     ├────────► Web Menu
-     │
-     └────────► PDF Export
+     ↓
+Web Menu + Admin Panel
+     ↓
+PDF Export
 ```
 
 ---
 
-# 🛠 Tech Stack
+## 🛠 Tech Stack
 
 ### Backend
 
@@ -265,20 +100,16 @@ SQLite Database
 * SQLite
 * SQLAlchemy
 
-### AI
+### AI & OCR
 
 * OpenRouter API
-* Large Language Models
-
-### OCR
-
-* OCR Engine Integration
+* OCR Processing
 
 ### Frontend
 
 * HTML
 * CSS
-* Jinja2 Templates
+* Jinja2
 
 ### Utilities
 
@@ -286,42 +117,36 @@ SQLite Database
 
 ---
 
-# 📂 Project Structure
+## 📂 Project Structure
 
 ```text
-MenuFlow
+MenuFlow/
 │
 ├── main.py
 ├── ai.py
 ├── ocr.py
 ├── database.py
 ├── models.py
-├── menuflow.db
 │
-├── templates
-│   ├── admin.html
+├── templates/
 │   ├── menu.html
+│   ├── admin.html
 │   ├── add.html
 │   └── edit.html
 │
-├── static
+├── static/
 │
 └── README.md
 ```
 
 ---
 
-# ⚙️ Installation
+## ⚙️ Installation
 
 Clone the repository:
 
 ```bash
 git clone https://github.com/biancarebeca/MenuFlow.git
-```
-
-Move into the project:
-
-```bash
 cd MenuFlow
 ```
 
@@ -332,8 +157,6 @@ python -m venv venv
 ```
 
 Activate it:
-
-### Windows
 
 ```bash
 venv\Scripts\activate
@@ -347,9 +170,7 @@ pip install -r requirements.txt
 
 ---
 
-# ▶️ Running the Application
-
-Start the server:
+## ▶️ Run the Application
 
 ```bash
 uvicorn main:app --reload
@@ -363,94 +184,35 @@ http://127.0.0.1:8000
 
 ---
 
-# 📍 Available Routes
+## 📍 Available Routes
 
 | Route          | Description           |
 | -------------- | --------------------- |
-| `/`            | Home                  |
-| `/upload`      | Upload Menu Image     |
-| `/view-menu`   | View Generated Menu   |
-| `/admin`       | Admin Panel           |
-| `/add`         | Add Product           |
-| `/edit/{id}`   | Edit Product          |
-| `/delete/{id}` | Delete Product        |
-| `/all-items`   | JSON Data             |
-| `/export-pdf`  | Export Menu PDF       |
-| `/docs`        | FastAPI Documentation |
+| `/view-menu`   | Display menu          |
+| `/admin`       | Admin panel           |
+| `/add`         | Add product           |
+| `/edit/{id}`   | Edit product          |
+| `/delete/{id}` | Delete product        |
+| `/all-items`   | JSON data             |
+| `/export-pdf`  | Export PDF            |
+| `/docs`        | FastAPI documentation |
 
 ---
 
-# 🎯 Key Challenges Solved
+## 🎯 What This Project Demonstrates
 
-### OCR Noise
-
-Restaurant menus are often inconsistent, blurry, or poorly formatted.
-
-MenuFlow extracts usable text and prepares it for AI processing.
-
-### Menu Structure Detection
-
-The application converts unstructured text into structured data.
-
-### Digitalization Automation
-
-What normally requires manual data entry is reduced to a single image upload.
-
-### Content Management
-
-The Admin Panel allows complete control over generated content.
+* OCR Integration
+* AI-Powered Data Extraction
+* FastAPI Development
+* SQLAlchemy & SQLite
+* CRUD Operations
+* PDF Generation
+* Full-Stack Web Application Development
 
 ---
 
-# 📈 Future Improvements
-
-* Multi-language menu support
-* Cloud database support
-* User authentication
-* Multiple restaurant management
-* Public shareable menu links
-* Image gallery for products
-* QR Code generation
-* Analytics dashboard
-
----
-
-# 👩‍💻 Author
+## 👩‍💻 Author
 
 **Bianca Rebeca**
 
-MenuFlow was built as a portfolio project to demonstrate practical experience with:
-
-* FastAPI
-* OCR Processing
-* AI Integration
-* SQLAlchemy
-* Database Design
-* CRUD Operations
-* PDF Generation
-* Full-Stack Application Development
-
----
-
-# ⭐ Why This Project Matters
-
-MenuFlow combines multiple modern technologies into a real-world business solution.
-
-Instead of being a simple CRUD application, it demonstrates the complete pipeline of:
-
-```text
-Image Processing
-        +
-Artificial Intelligence
-        +
-Backend Development
-        +
-Database Management
-        +
-User Interface Design
-        +
-Document Generation
-```
-
-all inside a single production-style application.
-
+Built as a portfolio project showcasing how OCR and AI can automate the creation and management of restaurant menus.
