@@ -46,6 +46,7 @@ Stores menu items using SQLite and SQLAlchemy.
 ### 🍽️ Dynamic Menu Page
 
 Displays products grouped by category.
+
 <img width="1388" height="812" alt="WhatsApp Image 2026-08-16 at 15 01 27" src="https://github.com/user-attachments/assets/acfd9e20-5e89-4af0-927b-b6fcabe63c2b" />
 
 
@@ -59,7 +60,8 @@ Features include:
 * ✏️ Edit Product
 * 🗑 Delete Product
 * 🔎 Search Products
-
+  
+<img width="1520" height="820" alt="WhatsApp Image 2026-08-16 at 15 22 46" src="https://github.com/user-attachments/assets/7e6d98c1-2a61-4042-a76f-695cf29409d1" />
 
 ### 📄 PDF Export
 
