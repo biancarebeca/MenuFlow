@@ -1,4 +1,3 @@
-<img width="1388" height="812" alt="WhatsApp Image 2026-08-16 at 15 01 27" src="https://github.com/user-attachments/assets/18775baa-3774-4fff-ba59-35e84b9ad2d3" />
 # 🍽️ MenuFlow
 
 > Transform a restaurant menu photo into a structured, editable digital menu using OCR, AI, and FastAPI.
@@ -47,7 +46,8 @@ Stores menu items using SQLite and SQLAlchemy.
 ### 🍽️ Dynamic Menu Page
 
 Displays products grouped by category.
-<img width="515" height="547" alt="WhatsApp Image 2026-08-16 at 15 01 10" src="https://github.com/user-attachments/assets/18d6903c-501b-48c5-b61e-dfda24d613bf" />
+<img width="1388" height="812" alt="WhatsApp Image 2026-08-16 at 15 01 27" src="https://github.com/user-attachments/assets/acfd9e20-5e89-4af0-927b-b6fcabe63c2b" />
+
 
 ### ⚙️ Admin Panel
 
@@ -60,12 +60,13 @@ Features include:
 * 🗑 Delete Product
 * 🔎 Search Products
 
-<img width="1388" height="812" alt="WhatsApp Image 2026-08-16 at 15 01 27" src="https://github.com/user-attachments/assets/0c4b3ded-cd3b-4e5b-94e1-20a4649dd4e0" />
+
 ### 📄 PDF Export
 
 Generate and download a PDF version of the current menu.
 
-<img width="1123" height="789" alt="WhatsApp Image 2026-08-16 at 15 01 46" src="https://github.com/user-attachments/assets/9e5860ed-eb97-416e-bc13-8b8a04810372" />
+<img width="1123" height="789" alt="WhatsApp Image 2026-08-16 at 15 01 46" src="https://github.com/user-attachments/assets/17f118ff-fcfc-4d8e-8bb5-0696fb9ee907" />
+
 
 
 ### 🔄 Menu Replacement
