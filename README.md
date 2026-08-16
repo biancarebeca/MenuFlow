@@ -1,34 +1,227 @@
 # 🍽️ MenuFlow
 
-MenuFlow transforms restaurant menu images into structured digital menus.
+> Transform a restaurant menu photo into a structured, editable digital menu using OCR, AI, and FastAPI.
 
-## Features
+---
 
-- OCR menu extraction
-- AI menu organization
-- Automatic category grouping
-- Dynamic category emojis
-- FastAPI backend
-- Modern responsive UI
+## 🚀 Overview
 
-## Tech Stack
+MenuFlow automates the process of converting printed restaurant menus into digital menus.
 
-- Python
-- FastAPI
-- EasyOCR
-- OpenRouter
-- HTML/CSS
-- Jinja2
+Upload a menu image and the application will:
 
-## Example Workflow
+* Extract text using OCR
+* Organize products with AI
+* Save menu items to a database
+* Generate a web menu automatically
+* Provide a full admin panel
+* Export the menu as a PDF
 
-1. Upload menu image
-2. OCR extracts text
-3. AI organizes items
-4. Menu is displayed automatically
+---
 
-## Author
+## ✨ Features
 
-David Bianca
+### 📸 Menu Upload
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/733201ac-601a-4d11-8f11-525abe080c32" />
+Upload a photo of a restaurant menu.
+
+### 🔍 OCR Processing
+
+Extracts text from the image automatically.
+
+### 🤖 AI Menu Structuring
+
+Identifies:
+
+* Categories
+* Product names
+* Prices
+
+and converts them into structured data.
+
+### 💾 Database Storage
+
+Stores menu items using SQLite and SQLAlchemy.
+
+### 🍽️ Dynamic Menu Page
+
+Displays products grouped by category.
+
+<img width="1388" height="812" alt="WhatsApp Image 2026-08-16 at 15 01 27" src="https://github.com/user-attachments/assets/acfd9e20-5e89-4af0-927b-b6fcabe63c2b" />
+
+
+### ⚙️ Admin Panel
+
+Manage menu items directly from the browser.
+
+Features include:
+
+* ➕ Add Product
+* ✏️ Edit Product
+* 🗑 Delete Product
+* 🔎 Search Products
+  
+<img width="1520" height="820" alt="WhatsApp Image 2026-08-16 at 15 22 46" src="https://github.com/user-attachments/assets/7e6d98c1-2a61-4042-a76f-695cf29409d1" />
+
+### 📄 PDF Export
+
+Generate and download a PDF version of the current menu.
+
+<img width="1123" height="789" alt="WhatsApp Image 2026-08-16 at 15 01 46" src="https://github.com/user-attachments/assets/17f118ff-fcfc-4d8e-8bb5-0696fb9ee907" />
+
+
+
+### 🔄 Menu Replacement
+
+Uploading a new menu automatically replaces the previous one.
+
+---
+
+## 🏗 Workflow
+
+```text
+Menu Image
+     ↓
+OCR Extraction
+     ↓
+AI Processing
+     ↓
+Structured Menu
+     ↓
+SQLite Database
+     ↓
+Web Menu + Admin Panel
+     ↓
+PDF Export
+```
+
+---
+
+## 🛠 Tech Stack
+
+### Backend
+
+* Python
+* FastAPI
+
+### Database
+
+* SQLite
+* SQLAlchemy
+
+### AI & OCR
+
+* OpenRouter API
+* OCR Processing
+
+### Frontend
+
+* HTML
+* CSS
+* Jinja2
+
+### Utilities
+
+* ReportLab (PDF Generation)
+
+---
+
+## 📂 Project Structure
+
+```text
+MenuFlow/
+│
+├── main.py
+├── ai.py
+├── ocr.py
+├── database.py
+├── models.py
+│
+├── templates/
+│   ├── menu.html
+│   ├── admin.html
+│   ├── add.html
+│   └── edit.html
+│
+├── static/
+│
+└── README.md
+```
+
+---
+
+## ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/biancarebeca/MenuFlow.git
+cd MenuFlow
+```
+
+Create a virtual environment:
+
+```bash
+python -m venv venv
+```
+
+Activate it:
+
+```bash
+venv\Scripts\activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## ▶️ Run the Application
+
+```bash
+uvicorn main:app --reload
+```
+
+Open:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+## 📍 Available Routes
+
+| Route          | Description           |
+| -------------- | --------------------- |
+| `/view-menu`   | Display menu          |
+| `/admin`       | Admin panel           |
+| `/add`         | Add product           |
+| `/edit/{id}`   | Edit product          |
+| `/delete/{id}` | Delete product        |
+| `/all-items`   | JSON data             |
+| `/export-pdf`  | Export PDF            |
+| `/docs`        | FastAPI documentation |
+
+---
+
+## 🎯 What This Project Demonstrates
+
+* OCR Integration
+* AI-Powered Data Extraction
+* FastAPI Development
+* SQLAlchemy & SQLite
+* CRUD Operations
+* PDF Generation
+* Full-Stack Web Application Development
+
+---
+
+## 👩‍💻 Author
+
+**Bianca Rebeca**
+
+Built as a portfolio project showcasing how OCR and AI can automate the creation and management of restaurant menus.
