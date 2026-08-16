@@ -1,5 +1,20 @@
+# Virtual environment
 venv/
+
+# Python cache
 __pycache__/
+*.pyc
+
+# Environment variables
 .env
+
+# Database
 menuflow.db
+
+# Generated files
+menu.pdf
 temp_image.jpg
+
+# OS files
+.DS_Store
+Thumbs.db
